@@ -589,5 +589,58 @@
 		</div>
 		<div class="col-md-1"></div>
 	</div>
+	<div id="amule-data" style="display: none">
+	     <?php
+		   echo "{";
+		   	echo "\"downloads\": [";
+		   		$downloads = amule_load_vars("downloads");
+		   		$numItems = count($downloads);
+		   		$i = 0;
+		   		foreach ($downloads as $file) {
+		   			echo "{";
+		   			echo "\"name\": \"", $file->name,"\","; 
+		   			echo "\"short_name\": \"", $file->short_name,"\","; 
+		   			echo "\"hash\": \"", $file->hash,"\","; 
+		   			echo "\"progress\": \"", ((float)$file->size_done*100)/((float)$file->size),"\","; 
+		   			//echo "'progress_img\": \"", $file->progress,"\","; 
+		   			echo "\"category\": \"", $file->category,"\","; 
+		   			echo "\"status\": \"", $file->status,"\","; 
+		   			echo "\"size\": \"", $file->size,"\","; 
+		   			echo "\"size_done\": \"", $file->size_done,"\","; 
+		   			echo "\"size_xfer\": \"", $file->size_xfer,"\","; 
+		   			echo "\"speed\": \"", $file->speed,"\","; 
+		   			echo "\"src_count\": \"", $file->src_count,"\","; 
+		   			echo "\"src_count_not_curr\": \"", $file->src_count_not_curr,"\","; 
+		   			echo "\"src_count_a4af\": \"", $file->src_count_a4af,"\","; 
+		   			echo "\"src_count_xfer\": \"", $file->src_count_xfer,"\","; 
+		   			echo "\"prio\": \"", $file->prio,"\","; 
+		   			echo "\"prio_auto\": \"", $file->prio_auto,"\"";
+		   			echo "}";
+		   			if(++$i != $numItems){
+		   				echo ",";
+		   			}
+		   		}
+		   	echo "],";
+		   	echo "\"uploads\": [";
+		   		$uploads = amule_load_vars("uploads");
+		   		$numItems = count($uploads);
+		   		$i = 0;
+		   		foreach ($uploads as $file) {
+		   			echo "{";
+		   			echo "\"short_name\": \"", $file->short_name,"\","; 
+		   			echo "\"username\": \"", $file->user_name,"\","; 
+		   			echo "\"up\": \"", $file->xfer_up,"\","; 
+		   			echo "\"down\": \"", $file->xfer_down,"\","; 
+		   			echo "\"speed\": \"", $file->xfer_speed,"\"";
+		   			echo "}";
+		   			if(++$i != $numItems){
+		   				echo ",";
+		   			}
+		   		}
+		   	echo "],";
+		   	echo "\"result\": \"success\"";
+		   echo "}";
+	     ?>
+    	</div>
 </body>
 </html>
